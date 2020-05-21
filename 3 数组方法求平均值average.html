@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function average (arr) {
+      let res = 0
+      if (arr.length === 0) {
+        return res
+      }
+
+      const len = arr.length
+      for (let i = 0; i < len; i++) {
+          res += arr[i]
+      }
+
+      return res / len
+    }
+
+    console.log(average([]))
+    console.log(average([33]))
+    console.log(average([1, 2, 3, 44, 33]))
+  </script>
+</body>
+</html>
