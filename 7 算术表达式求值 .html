@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 题目：计算算术表达式的值
+    // 例如：'(1 + ((2 + 3) * (4 * 5)))'
+    // 核心思想：
+    // 使用两个栈，分别保存运算符和数值
+    // 对每个运算符找到对应的数组进行计算后，将结果放入栈，直到运算符栈为空
+    // 思路：
+    // 1 遍历算术表达式
+    // 2 将操作数压入操作数栈
+    // 3 将运算符压入运算符栈
+    // 4 忽略左括号
+    // 5 遇到右括号时，弹出一个运算符，弹出所需的操作数，计算结果，压入操作数栈
+    // 6 处理完最后一个右括号，得到的值就是最终结果
+    // 扩展：
+    // 1 传入字符串的校验
+    // 2 除数为0的处理
+    // 3 不带括号的话怎么判断优先级？
+    function calculate(str) {
+      str = str.replace(/\s/g, '')
+      let valArr = []
+      let opsArr = []
+      for (let i = 0; i < str.length; i++) {
+        let curr = str[i]
+        if (curr === '(') continue
+        else if ('+-*/'.indexOf(curr) > -1) {
+          opsArr.push(curr)
+        } else if (curr === ')') {
+          console.log(valArr)
+          console.log(opsArr)
+          let op = opsArr.pop()
+          let val2 = valArr.pop()
+          let val1 = valArr.pop()
+          let res = 0
+          if (op === '+') {
+            res = val1 + val2
+          } else if (op === '-') {
+            res = val1 - val2
+          } else if (op === '*') {
+            res = val1 * val2
+          } else if (op === '/') {
+            res = val1 / val2
+          }
+          valArr.push(res)
+        } else {
+          valArr.push(curr * 1)
+        }
+      }
+      return valArr[0]
+    }
+
+    console.log(calculate('(1 + ((2 + 3) * (4 * 5)))'))
+  </script>
+</body>
+</html>

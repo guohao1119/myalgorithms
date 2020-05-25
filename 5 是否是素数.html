@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1 小于2的数，都不是素数
+    // 2 循环判断比num的平方根小的每个数，如果该数能被num整除，则说明不是素数
+    // 3 循环完没有找到，则是素数
+    function isPrime (num) {
+      if (num < 2) return false
+      for (let i = 2; i * i <= num; i++) {
+        if (num % i === 0) return false
+      }
+      return true
+    }
+
+    console.log(isPrime(1))
+    console.log(isPrime(2))
+    console.log(isPrime(3))
+    console.log(isPrime(5))
+    console.log(isPrime(17))
+    console.log(isPrime(18))
+  </script>
+</body>
+</html>
