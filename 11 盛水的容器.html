@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。
+    在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。
+    找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+
+    说明：你不能倾斜容器，且 n 的值至少为 2。
+
+    图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
+
+
+    示例：
+
+    输入：[1,8,6,2,5,4,8,3,7]
+    输出：49
+  </pre>
+  <script>
+    // 思路：
+    // 从数组的两端开始计算面积，此时的宽度是最大的，再尝试寻找合适的高度，以求得最大面积
+    // 夹逼思路
+    // 每次将左右高度中较小的一个高度移动一位，以便找到更格式的高度
+    // 当左右指针相遇时，对比出来的最大面积就是最终结果
+    // function maxArea(nums) {
+      //   let max = 0
+      
+      //   for (let i = 0, j = nums.length-1; i < j;) {
+    //     let height = nums[i] > nums[j] ? nums[j--] : nums[i++]
+    //  这里因为j或i已经移动了，所以宽度要加一，即 j - i + 1
+    //     max = Math.max(max, (j - i + 1) * height)
+    //   }
+    
+    //   return max
+    // }
+    
+    // 在比较时如果左右高度相同，可以同时移动一位，减少一次计算
+    function maxArea(nums) {
+      let max = 0
+      for (let i = 0, j = nums.length - 1; i < j;) {
+        let area = 0
+        if (nums[i] > nums[j]) {
+          area = (j - i) * [nums[j]]
+          j--
+        } else if (nums[i] < nums[j]) {
+          area = (j - i) * [nums[i]]
+          i++
+        } else {
+          area = (j - i) * [nums[j]]
+          i++
+          j--
+        }
+        if (area > max) {
+          max = area
+        }
+      }
+      return max
+    }
+
+    console.log(maxArea([1,8,6,2,5,4,8,3,7]))
+  </script>
+</body>
+</html>
