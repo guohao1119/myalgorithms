@@ -46,6 +46,8 @@
     //   return climbStairs(n - 1) + climbStairs(n - 2)
     // }
 
+    // 方法2：
+    // 循环计算法1
     // 使用一个数组来存放n-1和n
     // 每次把数组的和放在数组的第二个元素，把第二个元素放在第一个元素
     // 最后一次计算后得到的数组中的第二个元素就是最终结果
@@ -60,6 +62,24 @@
         arr[1] = temp + arr[0]
       }
       return arr[1]
+    }
+
+    // 方法3：
+    // 循环计算法2
+    // 用3个变量分别存储每一次的加数a，被加数b，和c
+    // c = a + b 计算后，将a和b分别设置为b和c，就可以继续计算c
+    // 最后的c就是结果
+    function climbStairs(n) {
+      if (n <= 2) return n
+      let a = 1
+      let b = 1
+      let c = 2
+      for (let i = 1; i < n; i++) {
+        c = a + b
+        a = b
+        b = c
+      }
+      return c
     }
 
     console.log(climbStairs(45))
