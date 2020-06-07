@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。
+
+    示例:
+
+    输入: ["eat", "tea", "tan", "ate", "nat", "bat"]
+    输出:
+    [
+      ["ate","eat","tea"],
+      ["nat","tan"],
+      ["bat"]
+    ]
+    说明：
+
+    所有输入均为小写字母。
+    不考虑答案输出的顺序。
+  </pre>
+  <script>
+    // 思路：
+    // 对每个元素进行排序后作为对象的key，存储所有该key的元素
+    function groupAnagrams(strs) {
+      let obj = {}
+      let key
+      strs.forEach(item => {
+        key = item.split('').sort().join('')
+        if (obj.hasOwnProperty(key)) {
+          obj[key].push(item)
+        } else {
+          obj[key] = [item]
+        }
+      })
+
+      let res = []
+      for (let key in obj) {
+        res.push(obj[key])
+      }
+      return res
+    }
+
+    console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+  </script>
+</body>
+</html>
