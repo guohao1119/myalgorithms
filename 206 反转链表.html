@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    反转一个单链表。
+
+    示例:
+
+    输入: 1->2->3->4->5->NULL
+    输出: 5->4->3->2->1->NULL
+    进阶:
+    你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
+  </pre>
+  <script>
+    /**
+     * Definition for singly-linked list.
+     * function ListNode(val) {
+     *     this.val = val;
+     *     this.next = null;
+     * }
+     */
+    // 迭代法 对每一个节点进行转向
+    // function reverseList(head) {
+    //   // 用prev指向前一个node，curr指向当前node
+    //   let [prev, curr] = [null, head]
+    //   // 遍历node，如果当前node不为null
+    //   while(curr) {
+    //     // 先将当前node指向的下一个node缓存起来
+    //     let temp = curr.next
+
+    //     // 将当前node指向的下一个node改变为前一个node
+    //     curr.next = prev
+
+    //     // prev指向修改了指向后的当前node
+    //     prev = curr
+
+    //     // 当前node指向第一步缓存的下一个node
+    //     curr = temp
+    //   }
+
+    //   // prev里存的就是变向后的node
+    //   return prev
+    // }
+
+    // 迭代法简化写法
+    // function reverseList(head) {
+    //   let [prev, curr] = [null, head]
+    //   while(curr) {
+    //     [curr.next, prev, curr] = [prev, curr, curr.next]
+    //   }
+    //   return prev
+    // }
+
+    // 递归
+    // function reverseList(head) {
+    //   if (!head || !head.next) return head
+
+    //   let next = head.next
+    //   let reverseHead = reverseList(next)
+
+    //   head.next = null
+
+    //   next.next = head
+
+    //   return reverseHead
+    // }
+
+    // 递归2
+    function reverseList(head) {
+      return reverse(null, head)
+    }
+
+    function reverse(prev, curr) {
+      if (!curr) return prev
+      let temp = curr.next
+      curr.next = prev
+      return reverse(curr, temp)
+    }
+
+
+    console.log(reverseList([1,8,6,2,5,4,8,3,7]))
+  </script>
+</body>
+</html>

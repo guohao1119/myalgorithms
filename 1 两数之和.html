@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+
+    你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
+
+    
+
+    示例:
+
+    给定 nums = [2, 7, 11, 15], target = 9
+
+    因为 nums[0] + nums[1] = 2 + 7 = 9
+    所以返回 [0, 1]
+  </pre>
+  <script>
+    // 思路：
+    // 1 暴力求解
+    // 两层循环，每两个不同的元素都相加一次，比较是否等于目标值，等于则返回对应的下标
+    // 时间复杂度O(n^2)
+    // function twoSum(nums, target) {
+    //   // 外层循环遍历到数组的倒数第二个元素即可，因为内层循环会遍历到最后一个元素，可以减少一次判断
+    //   for(let i = 0; i < nums.length - 1; i++) {
+    //     for(let j = i + 1; j < nums.length; j++) {
+    //       if (nums[i] + nums[j] === target) {
+    //         return [i, j]
+    //       }
+    //     }
+    //   }
+    // }
+
+    // 2 找差值
+    // 1 将遍历过的元素及其下标放入一个对象中，
+    // 2 遍历元素时，计算目标值与该元素的差值，并判断是否在对象中，如果在，则返回对应下标
+    function twoSum(nums, target) {
+      let obj = {}
+      for (let i = 0; i < nums.length; i++) {
+        let dif = target - nums[i]
+        if (obj.hasOwnProperty(dif)) {
+          return [obj[dif], i]
+        }
+        obj[nums[i]] = i
+      }
+    }
+
+
+
+    console.log(twoSum([2, 7, 11, 15], 9))
+  </script>
+</body>
+</html>
