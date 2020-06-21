@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+
+    示例：
+
+    输入：n = 3
+    输出：[
+          "((()))",
+          "(()())",
+          "(())()",
+          "()(())",
+          "()()()"
+        ]
+  </pre>
+  <script>
+    // 思路：
+
+    function generateParenthesis(n) {
+      let res = []
+      generate(0, 0, n, '', res)
+      return res
+    }
+
+    // 递归的四个步骤
+    // 1 先写递归结束的判断
+    //    n对括号，说明有n个左括号和n个右括号，那么当left和right都为n时，说明生成完毕
+    // 2 处理当前逻辑
+    //    添加一个左括号或者添加一个右括号 str + '(', str + ')'
+    // 3 进入下一个递归
+    //    如果添加了左括号，则左括号数量加1，如果添加了右括号，则右括号数量加1
+    // 4 状态恢复
+    //    
+    // left 左括号数量，初始为0
+    // right 右括号数量，初始为0
+    // 生成的括号字符串，初始为''
+    // res最终的数组
+    function generate(left, right, n, str, res) {
+      // 当左右括号的数量都为n时，说明生成完毕，将生成的字符串放入结果数组中，结束递归
+      if (left === n && right === n) {
+        res.push(str)
+        return
+      }
+      // 当左括号数量小于n时，说明还可以生成，增加一个左括号
+      if (left < n) {
+        generate(left + 1, right, n, str + '(', res)
+      }
+      // 当左括号数量大于右括号数量时，说明还可以加入右括号
+      if (left > right) {
+        generate(left, right + 1, n, str + ')', res)
+      }
+    }
+
+    console.log(generateParenthesis(3))
+  </script>
+</body>
+</html>
